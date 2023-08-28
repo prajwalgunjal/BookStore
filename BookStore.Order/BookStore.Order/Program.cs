@@ -1,3 +1,6 @@
+using BookStore.Order.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookStore.Order
 {
     public class Program
@@ -5,6 +8,12 @@ namespace BookStore.Order
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+            builder.Services.AddDbContext<Order_DB_Context>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore_Orders_Connection"));
+            });
 
             // Add services to the container.
 

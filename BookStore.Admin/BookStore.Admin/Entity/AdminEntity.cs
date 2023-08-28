@@ -40,5 +40,7 @@ namespace BookStore.Admin.Entity
         [DataType(DataType.Password)]
         [PasswordPropertyText]
         public string Password { get; set; }
+
+
     }
 }
