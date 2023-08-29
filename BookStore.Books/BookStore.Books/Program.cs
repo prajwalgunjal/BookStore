@@ -44,6 +44,7 @@ namespace BookStore.Books
                 });
 
             });
+
             // Add services to the container.
             builder.Services.AddTransient<IBookRepo, BookRepo>();
             builder.Services.AddControllers();
@@ -85,7 +86,7 @@ namespace BookStore.Books
             }
 
             app.UseHttpsRedirection();
-            app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

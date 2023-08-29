@@ -56,7 +56,7 @@ namespace BookStore.User
             //Entity Framework
             builder.Services.AddDbContext<User_DBContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("UserDB"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("BookStore_User_Connection"));
             });
             builder.Services.AddTransient<IUserRepo, UserRepo>();
 

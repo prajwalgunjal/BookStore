@@ -11,7 +11,14 @@ namespace BookStore.Order.Entity
         public int UserID { get; set; }
         public int Quantity { get; set; }
         public int BookID { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [NotMapped]
+        public float OrderAmount { get; set; }
+        [NotMapped]
+        public BookEntity Book { get; set; }
+
+        [NotMapped]
+        public UserEntity User { get; set; }
     }
 
 }
