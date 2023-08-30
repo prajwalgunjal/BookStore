@@ -49,5 +49,52 @@ namespace BookStore.Order.Service
             order_DB_Context.SaveChanges();
             return order;
         }
+
+
+        // view order -> return OrderEntity with order amount and user, book details
+        // delete order
+
+        public async Task<List<OrderEntity>> GetOrders(int userID, string token)
+        {
+            List<OrderEntity> result = order_DB_Context.Orders.Where(x => x.UserID == userID).ToList();
+
+            if (result != null)
+            {
+                foreach (OrderEntity order in result)
+                {
+                    order.Book = await bookRepo.GetBookDetails(order.BookID);
+                    order.User = await userRepo.GetUserDetails(token);
+                }
+                return result;
+            }
+            return null;
+        }
+
+        public async Task<OrderEntity> GetOrdersByOrderID(int orderID, int userID, string token)
+        {
+            OrderEntity orderEntity = order_DB_Context.Orders.Where(x => x.OrderID == orderID && x.UserID == userID).FirstOrDefault();
+            if (orderEntity != null)
+            {
+                orderEntity.Book = await bookRepo.GetBookDetails(orderEntity.BookID);
+                orderEntity.User = await userRepo.GetUserDetails(token);
+
+                return orderEntity;
+            }
+            return null;
+        }
+
+        public bool RemoveOrder(int orderID, int userID)
+        {
+            OrderEntity orderEntity = order_DB_Context.Orders.Where(x => x.OrderID == orderID && x.UserID == userID).FirstOrDefault();
+            if (orderEntity != null)
+            {
+                order_DB_Context.Orders.Remove(orderEntity);
+                order_DB_Context.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
+
     }
 }
