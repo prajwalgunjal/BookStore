@@ -7,5 +7,6 @@ namespace BookStore.Order.Context
     {
         public Order_DB_Context(DbContextOptions<Order_DB_Context> dbContextOptions): base(dbContextOptions) { }
         public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<WishListEntity> WishList { get; set; }
     }
 }

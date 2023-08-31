@@ -51,6 +51,13 @@ namespace BookStore.Order
             builder.Services.AddTransient<IBookRepo, BookRepo>();
             builder.Services.AddTransient<IOrderRepo, OrderRepo>();
             builder.Services.AddTransient<IUserRepo, UserRepo>();
+            builder.Services.AddTransient<IWishListRepo, WishListRepo>();
+
+            // httpClientFactory Code
+            builder.Services.AddHttpClient("MyApi", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7115/api/");
+            });
 
 
             //jwt
